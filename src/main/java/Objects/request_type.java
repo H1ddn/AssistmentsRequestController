@@ -9,6 +9,12 @@ public class request_type {
 
     private LocalDate date_created;
 
+    public request_type(final Long uid, final String name) {
+        Uid = uid;
+        this.name = name;
+        this.date_created = LocalDate.now();
+    }
+
     public Long getUid() {
         return Uid;
     }

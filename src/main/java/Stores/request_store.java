@@ -21,7 +21,7 @@ public class request_store {
      *
      * @return Uid of newly added request
      */
-    public Long add_request_type(request requestObject){
+    public Long add_request(request requestObject){
         final Long nextUid;
         final LocalDate dateCreated = LocalDate.now();
 
@@ -42,7 +42,7 @@ public class request_store {
     /**
      * @return unmodifiable list of all current requests
      */
-    public List<request> get_request_types() {
+    public List<request> get_requests() {
         return Collections.unmodifiableList(this.requests);
     }
 
