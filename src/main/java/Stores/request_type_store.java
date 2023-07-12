@@ -16,6 +16,12 @@ public class request_type_store {
 
     private final List<request_type> request_types = new ArrayList();
 
+    public request_type_store() {
+        this.add_request_type(new request_type(1L, "multiple_choice"));
+        this.add_request_type(new request_type(1L+1, "short_answer"));
+        this.add_request_type(new request_type(1L+2, "open-ended"));
+    }
+
     /**
      * Adds a new request type to the list of request_types
      *

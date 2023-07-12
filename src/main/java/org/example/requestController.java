@@ -42,9 +42,7 @@ public class requestController {
 
     @PostMapping("/")
     public void processRequests(@RequestBody final request[] requests) throws UnknownHostException, URISyntaxException {
-        rtStore.add_request_type(new request_type(1L, "multiple_choice"));
-        rtStore.add_request_type(new request_type(1L+1, "short_answer"));
-        rtStore.add_request_type(new request_type(1L+2, "open-ended"));
+
 
         StringBuilder requestTypes = new StringBuilder();
         final List<request_type> rtList = rtStore.get_request_types();
