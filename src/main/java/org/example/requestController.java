@@ -1,10 +1,12 @@
 package org.example;
+
+import Enum.Method;
 import Objects.request;
 import Objects.request_type;
-import Enum.Method;
 import Objects.root_request_audit;
 import Stores.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +20,7 @@ import java.net.UnknownHostException;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
 
 @RestController
 public class requestController {
@@ -50,16 +53,10 @@ public class requestController {
         for (final request request : requests) {
             rStore.add_request(request);
             final String name = rtList.get((int) (request.getRequest_type_id()-1)).getName();
-            switch (name){
-                case "multiple_choice":
-                    requestTypes.append("A");
-                    break;
-                case "short_answer":
-                    requestTypes.append("B");
-                    break;
-                case "open-ended":
-                    requestTypes.append("C");
-                    break;
+            switch (name) {
+                case "multiple_choice" -> requestTypes.append("A");
+                case "short_answer" -> requestTypes.append("B");
+                case "open-ended" -> requestTypes.append("C");
             }
         }
 
@@ -77,7 +74,7 @@ public class requestController {
         final InetAddress address = InetAddress.getByName(remoteAddress);
         final String host = address.getHostAddress();
         final URI uri = new URI("http", null, host, -1, "/resource", null, null);
-        root_request_audit rrAudit = new root_request_audit(
+        final root_request_audit rrAudit = new root_request_audit(
                 request.getRoot_request_id(),
                 uri,
                 method,
