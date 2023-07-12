@@ -1,13 +1,10 @@
 package org.example;
-import Objects.request_type;
-import Stores.request_type_store;
-import Stores.root_request_audit_store;
-import org.springframework.boot.SpringApplication;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+@SpringBootApplication(scanBasePackages = {"Enum", "org.example", "Objects", "Stores"})
 public class Main {
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         SpringApplication.run(Main.class, args);
     }
 }
