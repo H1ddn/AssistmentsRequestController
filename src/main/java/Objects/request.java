@@ -40,4 +40,14 @@ public class request {
     public void setDate_created(final LocalDate date_created) {
         this.date_created = date_created;
     }
+
+    public void printRequest(){
+
+        System.out.println("\n\rid: " + Uid);
+        System.out.println("root_request_id: " + root_request_id);
+        System.out.println("request_type_id " + request_type_id);
+        System.out.println("date_created: " + date_created);
+
+    }
+
 }
