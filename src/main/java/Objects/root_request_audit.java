@@ -14,12 +14,10 @@ public class root_request_audit {
     private LocalDate date_started;
     private LocalDate date_ended;
 
-    public root_request_audit(final Long root_request_id, final URI uri, final Method method, final InetAddress remote_address, final LocalDate date_started) {
-        this.root_request_id = root_request_id;
+    public root_request_audit(final URI uri, final Method method, final InetAddress remote_address) {
         this.uri = uri;
         this.method = method;
         this.remote_address = remote_address;
-        this.date_started = date_started;
     }
 
     public Long getRoot_request_id() {

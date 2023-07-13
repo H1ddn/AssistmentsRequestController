@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Component
-@Scope("Singleton")
+@Scope("singleton")
 public class root_request_store {
     private final List<root_request> root_requests = new ArrayList();
 
