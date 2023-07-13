@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Component
-@Scope("Singleton")
+@Scope("singleton")
 public class request_audit_store {
     private final List<request_audit> requestAudits = new ArrayList();
 
@@ -20,7 +20,7 @@ public class request_audit_store {
      *
      * @return Uid of newly added request audit
      */
-    public Long add_request_type(request_audit requestAudit){
+    public Long add_request_audit(request_audit requestAudit){
         final Long nextUid;
         final LocalDate dateCreated = LocalDate.now();
 
