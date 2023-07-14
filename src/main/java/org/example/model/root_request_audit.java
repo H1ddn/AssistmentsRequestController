@@ -1,8 +1,9 @@
-package org.example.Objects;
+package org.example.model;
 
-import java.net.URI;
-import org.example.Enum.Method;
+import org.example.controller.Method;
+
 import java.net.InetAddress;
+import java.net.URI;
 import java.time.LocalDate;
 
 public class root_request_audit {

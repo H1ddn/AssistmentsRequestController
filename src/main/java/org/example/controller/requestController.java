@@ -1,10 +1,9 @@
-package org.example;
+package org.example.controller;
 
-import org.example.Enum.Method;
-import org.example.Objects.request;
-import org.example.Objects.request_type;
-import org.example.Objects.root_request_audit;
-import org.example.Stores.*;
+import org.example.model.request;
+import org.example.model.request_type;
+import org.example.model.root_request_audit;
+import org.example.store.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

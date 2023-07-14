@@ -1,11 +1,10 @@
-package org.example.Stores;
+package org.example.store;
 
-import java.time.LocalDate;
-
-import org.example.Objects.request_audit;
+import org.example.model.request_audit;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
