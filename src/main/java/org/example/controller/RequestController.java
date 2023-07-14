@@ -23,18 +23,29 @@ import java.util.stream.Stream;
 @RestController
 public class RequestController {
 
+    private final ProblemRequestStore prStore;
+    private final RequestAuditStore raStore;
+    private final RequestStore rStore;
+    private final RequestTypeStore rtStore;
+    private final RootRequestAuditStore rraStore;
+    private final RootRequestStore rrStore;
+
     @Autowired
-    private ProblemRequestStore prStore;
-    @Autowired
-    private RequestAuditStore raStore;
-    @Autowired
-    private RequestStore rStore;
-    @Autowired
-    private RequestTypeStore rtStore;
-    @Autowired
-    private RootRequestAuditStore rraStore;
-    @Autowired
-    private RootRequestStore rrStore;
+    public RequestController(
+        final ProblemRequestStore prStore,
+        final RequestAuditStore raStore,
+        final RequestStore rStore,
+        final RequestTypeStore rtStore,
+        final RootRequestAuditStore rraStore,
+        final RootRequestStore rrStore
+    ) {
+        this.prStore = prStore;
+        this.raStore = raStore;
+        this.rStore = rStore;
+        this.rtStore = rtStore;
+        this.rraStore = rraStore;
+        this.rrStore = rrStore;
+    }
 
     @GetMapping("/")
     public ResponseEntity<List<Request>> getAllRequests() {
