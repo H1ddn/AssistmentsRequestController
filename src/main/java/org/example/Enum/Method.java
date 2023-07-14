@@ -1,4 +1,4 @@
-package Enum;
+package org.example.Enum;
 
 public enum Method {
     A {

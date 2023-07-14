@@ -1,7 +1,7 @@
-package Objects;
+package org.example.Objects;
 
 import java.net.URI;
-import Enum.Method;
+import org.example.Enum.Method;
 import java.net.InetAddress;
 import java.time.LocalDate;
 

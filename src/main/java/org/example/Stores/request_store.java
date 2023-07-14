@@ -1,8 +1,8 @@
-package Stores;
+package org.example.Stores;
 
 import java.time.LocalDate;
 
-import Objects.request;
+import org.example.Objects.request;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
