@@ -1,6 +1,6 @@
 package org.example.store;
 
-import org.example.model.request_audit;
+import org.example.model.RequestAudit;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -11,15 +11,15 @@ import java.util.List;
 
 @Component
 @Scope("singleton")
-public class request_audit_store {
-    private final List<request_audit> requestAudits = new ArrayList();
+public class RequestAuditStore {
+    private final List<RequestAudit> requestAudits = new ArrayList();
 
     /**
      * Adds a new request audit to the list of request audits
      *
      * @return Uid of newly added request audit
      */
-    public Long add_request_audit(request_audit requestAudit){
+    public Long add_request_audit(RequestAudit requestAudit){
         final Long nextUid;
         final LocalDate dateCreated = LocalDate.now();
 
@@ -40,7 +40,7 @@ public class request_audit_store {
     /**
      * @return unmodifiable list of all current request audits
      */
-    public List<request_audit> get_request_types() {
+    public List<RequestAudit> get_request_types() {
         return Collections.unmodifiableList(this.requestAudits);
     }
 

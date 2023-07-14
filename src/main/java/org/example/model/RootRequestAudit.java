@@ -6,7 +6,7 @@ import java.net.InetAddress;
 import java.net.URI;
 import java.time.LocalDate;
 
-public class root_request_audit {
+public class RootRequestAudit {
 
     private Long root_request_id;
     private URI uri;
@@ -15,7 +15,7 @@ public class root_request_audit {
     private LocalDate date_started;
     private LocalDate date_ended;
 
-    public root_request_audit(final URI uri, final Method method, final InetAddress remote_address) {
+    public RootRequestAudit(final URI uri, final Method method, final InetAddress remote_address) {
         this.uri = uri;
         this.method = method;
         this.remote_address = remote_address;

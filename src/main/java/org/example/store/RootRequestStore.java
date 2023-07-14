@@ -1,6 +1,6 @@
 package org.example.store;
 
-import org.example.model.root_request;
+import org.example.model.RootRequest;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -11,8 +11,8 @@ import java.util.List;
 
 @Component
 @Scope("singleton")
-public class root_request_store {
-    private final List<root_request> root_requests = new ArrayList();
+public class RootRequestStore {
+    private final List<RootRequest> root_requests = new ArrayList();
 
     /**
      * Creates a new root request and adds it to the list of root_requests
@@ -29,7 +29,7 @@ public class root_request_store {
             nextUid = 1L;
         }
 
-        root_requests.add(new root_request(nextUid,dateCreated));
+        root_requests.add(new RootRequest(nextUid,dateCreated));
 
         return nextUid;
     }
@@ -37,7 +37,7 @@ public class root_request_store {
     /**
      * @return unmodifiable list of all current root_requests
      */
-    public List<root_request> get_root_requests() {
+    public List<RootRequest> get_root_requests() {
         return Collections.unmodifiableList(this.root_requests);
     }
 

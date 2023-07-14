@@ -2,7 +2,7 @@ package org.example.model;
 
 import java.time.LocalDate;
 
-public class problem_request {
+public class ProblemRequest {
     private Long Uid;
     private Long problem_id;
     private Long teacher_id;

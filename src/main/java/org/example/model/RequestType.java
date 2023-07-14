@@ -1,7 +1,7 @@
 package org.example.model;
 
 import java.time.LocalDate;
-public class request_type {
+public class RequestType {
 
     private Long Uid;
     private String name;
@@ -9,7 +9,7 @@ public class request_type {
 
     private LocalDate date_created;
 
-    public request_type(final Long uid, final String name) {
+    public RequestType(final Long uid, final String name) {
         Uid = uid;
         this.name = name;
         this.date_created = LocalDate.now();

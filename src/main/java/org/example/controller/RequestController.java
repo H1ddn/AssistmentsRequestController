@@ -1,8 +1,8 @@
 package org.example.controller;
 
-import org.example.model.request;
-import org.example.model.request_type;
-import org.example.model.root_request_audit;
+import org.example.model.Request;
+import org.example.model.RequestType;
+import org.example.model.RootRequestAudit;
 import org.example.store.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,34 +21,34 @@ import java.util.stream.Stream;
 
 
 @RestController
-public class requestController {
+public class RequestController {
 
     @Autowired
-    private problem_request_store prStore;
+    private ProblemRequestStore prStore;
     @Autowired
-    private request_audit_store raStore;
+    private RequestAuditStore raStore;
     @Autowired
-    private request_store rStore;
+    private RequestStore rStore;
     @Autowired
-    private request_type_store rtStore;
+    private RequestTypeStore rtStore;
     @Autowired
-    private root_request_audit_store rraStore;
+    private RootRequestAuditStore rraStore;
     @Autowired
-    private root_request_store rrStore;
+    private RootRequestStore rrStore;
 
     @GetMapping("/")
-    public ResponseEntity<List<request>> getAllRequests() {
+    public ResponseEntity<List<Request>> getAllRequests() {
         return ResponseEntity.ok(rStore.get_requests());
     }
 
     @PostMapping("/")
-    public ResponseEntity<root_request_audit> processRequests(@RequestBody final List<request> requests) throws UnknownHostException, URISyntaxException {
+    public ResponseEntity<RootRequestAudit> processRequests(@RequestBody final List<Request> requests) throws UnknownHostException, URISyntaxException {
 
 
         StringBuilder requestTypes = new StringBuilder();
-        final List<request_type> rtList = rtStore.get_request_types();
+        final List<RequestType> rtList = rtStore.get_request_types();
         // Process the array of requests
-        for (final request request : requests) {
+        for (final Request request : requests) {
             final String name = rtList.get((int) (request.getRequest_type_id()-1)).getName();
             switch (name) {
                 case "multiple_choice" -> requestTypes.append("A");
@@ -70,13 +70,13 @@ public class requestController {
         final InetAddress address = InetAddress.getByName(remoteAddress);
         final String host = address.getHostAddress();
         final URI uri = new URI("http", null, host, -1, "/resource", null, null);
-        final root_request_audit rrAudit = new root_request_audit(
+        final RootRequestAudit rrAudit = new RootRequestAudit(
                 uri,
                 method,
                 address);
-        root_request_audit rrAudit_final = rraStore.add_root_request_audit(rrAudit);
+        RootRequestAudit rrAudit_final = rraStore.add_root_request_audit(rrAudit);
 
-        for (final request request : requests) {
+        for (final Request request : requests) {
             request.setRoot_request_id(rrAudit.getRoot_request_id());
             rStore.add_request(request);
         }

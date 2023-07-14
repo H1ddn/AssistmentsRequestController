@@ -2,12 +2,12 @@ package org.example.model;
 
 import java.time.LocalDate;
 
-public class root_request {
+public class RootRequest {
 
     private final Long uid;
     private final LocalDate date_created;
 
-    public root_request(final Long uid, final LocalDate date_created) {
+    public RootRequest(final Long uid, final LocalDate date_created) {
         this.uid = uid;
         this.date_created = date_created;
     }

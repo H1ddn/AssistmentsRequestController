@@ -1,6 +1,6 @@
 package org.example.store;
 
-import org.example.model.request;
+import org.example.model.Request;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -11,16 +11,16 @@ import java.util.List;
 
 @Component
 @Scope("singleton")
-public class request_store {
+public class RequestStore {
 
-    private final List<request> requests = new ArrayList();
+    private final List<Request> requests = new ArrayList();
 
     /**
      * Adds a new request to the list of requests
      *
      * @return Uid of newly added request
      */
-    public Long add_request(request requestObject){
+    public Long add_request(Request requestObject){
         final Long nextUid;
         final LocalDate dateCreated = LocalDate.now();
 
@@ -41,7 +41,7 @@ public class request_store {
     /**
      * @return unmodifiable list of all current requests
      */
-    public List<request> get_requests() {
+    public List<Request> get_requests() {
         return Collections.unmodifiableList(this.requests);
     }
 

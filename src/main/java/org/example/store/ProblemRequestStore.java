@@ -1,6 +1,6 @@
 package org.example.store;
 
-import org.example.model.problem_request;
+import org.example.model.ProblemRequest;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -11,16 +11,16 @@ import java.util.List;
 
 @Component
 @Scope("singleton")
-public class problem_request_store {
+public class ProblemRequestStore {
 
-    private final List<problem_request> problem_requests = new ArrayList();
+    private final List<ProblemRequest> problem_requests = new ArrayList();
 
     /**
      * Adds a new problem request to the list of problem requests
      *
      * @return Uid of newly added problem request
      */
-    public Long add_request_type(problem_request problemRequest){
+    public Long add_request_type(ProblemRequest problemRequest){
         final Long nextUid;
         final LocalDate dateCreated = LocalDate.now();
 
@@ -41,7 +41,7 @@ public class problem_request_store {
     /**
      * @return unmodifiable list of all current problem requests
      */
-    public List<problem_request> get_request_types() {
+    public List<ProblemRequest> get_request_types() {
         return Collections.unmodifiableList(this.problem_requests);
     }
 

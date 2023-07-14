@@ -2,7 +2,7 @@ package org.example.model;
 
 import java.time.LocalDate;
 
-public class request_audit {
+public class RequestAudit {
     private Long Uid;
     private LocalDate date_started;
     private LocalDate date_ended;

@@ -1,6 +1,6 @@
 package org.example.store;
 
-import org.example.model.request_type;
+import org.example.model.RequestType;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -11,14 +11,14 @@ import java.util.List;
 
 @Component
 @Scope("singleton")
-public class request_type_store {
+public class RequestTypeStore {
 
-    private final List<request_type> request_types = new ArrayList();
+    private final List<RequestType> request_types = new ArrayList();
 
-    public request_type_store() {
-        this.add_request_type(new request_type(1L, "multiple_choice"));
-        this.add_request_type(new request_type(1L+1, "short_answer"));
-        this.add_request_type(new request_type(1L+2, "open-ended"));
+    public RequestTypeStore() {
+        this.add_request_type(new RequestType(1L, "multiple_choice"));
+        this.add_request_type(new RequestType(1L+1, "short_answer"));
+        this.add_request_type(new RequestType(1L+2, "open-ended"));
     }
 
     /**
@@ -26,7 +26,7 @@ public class request_type_store {
      *
      * @return Uid of newly added request type
      */
-    public Long add_request_type(request_type requestType){
+    public Long add_request_type(RequestType requestType){
         final Long nextUid;
         final LocalDate dateCreated = LocalDate.now();
 
@@ -47,7 +47,7 @@ public class request_type_store {
     /**
      * @return unmodifiable list of all current request types
      */
-    public List<request_type> get_request_types() {
+    public List<RequestType> get_request_types() {
         return Collections.unmodifiableList(this.request_types);
     }
 
