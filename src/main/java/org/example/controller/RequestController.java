@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.example.model.Request;
 import org.example.model.RequestType;
 import org.example.model.RootRequestAudit;
@@ -53,7 +54,10 @@ public class RequestController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<RootRequestAudit> processRequests(@RequestBody final List<Request> requests) throws UnknownHostException, URISyntaxException {
+    public ResponseEntity<RootRequestAudit> processRequests(
+        @RequestBody final List<Request> requests,
+        final HttpServletRequest httpRequest
+    ) throws UnknownHostException, URISyntaxException {
 
 
         StringBuilder requestTypes = new StringBuilder();
@@ -74,17 +78,11 @@ public class RequestController {
                 .distinct()
                 .collect(Collectors.joining()));
 
-        final Method method = Method.valueOf(String.valueOf(requestTypes));
-        method.print();
-
-        final String remoteAddress = "example.com";
-        final InetAddress address = InetAddress.getByName(remoteAddress);
-        final String host = address.getHostAddress();
-        final URI uri = new URI("http", null, host, -1, "/resource", null, null);
         final RootRequestAudit rrAudit = new RootRequestAudit(
-                uri,
-                method,
-                address);
+            URI.create(httpRequest.getRequestURI()),
+            httpRequest.getMethod(),
+            InetAddress.getByName(httpRequest.getRemoteAddr())
+        );
         RootRequestAudit rrAudit_final = rraStore.add_root_request_audit(rrAudit);
 
         for (final Request request : requests) {

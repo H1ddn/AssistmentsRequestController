@@ -1,7 +1,5 @@
 package org.example.model;
 
-import org.example.controller.Method;
-
 import java.net.InetAddress;
 import java.net.URI;
 import java.time.LocalDate;
@@ -10,12 +8,12 @@ public class RootRequestAudit {
 
     private Long root_request_id;
     private URI uri;
-    private Method method;
+    private String method;
     private InetAddress remote_address;
     private LocalDate date_started;
     private LocalDate date_ended;
 
-    public RootRequestAudit(final URI uri, final Method method, final InetAddress remote_address) {
+    public RootRequestAudit(final URI uri, final String method, final InetAddress remote_address) {
         this.uri = uri;
         this.method = method;
         this.remote_address = remote_address;
@@ -37,11 +35,11 @@ public class RootRequestAudit {
         this.uri = uri;
     }
 
-    public Method getMethod() {
+    public String getMethod() {
         return method;
     }
 
-    public void setMethod(final Method method) {
+    public void setMethod(final String method) {
         this.method = method;
     }
 
