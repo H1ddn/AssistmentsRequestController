@@ -2,7 +2,7 @@ package org.example.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.example.model.Request;
-import org.example.model.RequestType;
+import org.example.model.RequestAudit;
 import org.example.model.RootRequestAudit;
 import org.example.store.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +16,20 @@ import java.net.InetAddress;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 @RestController
 public class RequestController {
+
+    private static void doProblemRequest() {
+        System.out.println("doProblemRequest");
+    }
+
+    private static void doQuestionRequest() {
+        System.out.println("doQuestionRequest");
+    }
 
     private final ProblemRequestStore prStore;
     private final RequestAuditStore raStore;
@@ -58,37 +65,40 @@ public class RequestController {
         @RequestBody final List<Request> requests,
         final HttpServletRequest httpRequest
     ) throws UnknownHostException, URISyntaxException {
-
-
-        StringBuilder requestTypes = new StringBuilder();
-        final List<RequestType> rtList = rtStore.get_request_types();
-        // Process the array of requests
-        for (final Request request : requests) {
-            final String name = rtList.get((int) (request.getRequest_type_id()-1)).getName();
-            switch (name) {
-                case "multiple_choice" -> requestTypes.append("A");
-                case "short_answer" -> requestTypes.append("B");
-                case "open-ended" -> requestTypes.append("C");
-            }
-        }
-
-        //Removing Duplicates and Sorting
-        requestTypes = new StringBuilder(Stream.of(requestTypes.toString().split(""))
-                .sorted()
-                .distinct()
-                .collect(Collectors.joining()));
+        final Long rootRequestId = rrStore.add_root_request();
 
         final RootRequestAudit rrAudit = new RootRequestAudit(
             URI.create(httpRequest.getRequestURI()),
             httpRequest.getMethod(),
             InetAddress.getByName(httpRequest.getRemoteAddr())
         );
-        RootRequestAudit rrAudit_final = rraStore.add_root_request_audit(rrAudit);
+        rrAudit.setRoot_request_id(rootRequestId);
 
-        for (final Request request : requests) {
-            request.setRoot_request_id(rrAudit.getRoot_request_id());
-            rStore.add_request(request);
+        rrAudit.setDate_started(LocalDate.now());
+
+        for(final Request request : requests) {
+            final Long requestId = rStore.add_request(request);
+
+            final RequestAudit requestAudit = new RequestAudit();
+            requestAudit.setRequestId(requestId);
+            requestAudit.setDate_started(LocalDate.now());
+
+            final Long requestType = request.getRequest_type_id();
+
+            if(requestType == 1) {
+                doProblemRequest();
+            } else if(requestType == 2) {
+                doQuestionRequest();
+            }
+
+            requestAudit.setDate_ended(LocalDate.now());
+
+            raStore.add_request_audit(requestAudit);
         }
+
+        rrAudit.setDate_ended(LocalDate.now());
+
+        final RootRequestAudit rrAudit_final = rraStore.add_root_request_audit(rrAudit);
 
         return ResponseEntity.ok(rrAudit_final);
 

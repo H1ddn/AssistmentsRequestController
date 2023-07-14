@@ -3,16 +3,16 @@ package org.example.model;
 import java.time.LocalDate;
 
 public class RequestAudit {
-    private Long Uid;
+    private Long requestId;
     private LocalDate date_started;
     private LocalDate date_ended;
 
-    public Long getUid() {
-        return Uid;
+    public Long getRequestId() {
+        return requestId;
     }
 
-    public void setUid(final Long uid) {
-        Uid = uid;
+    public void setRequestId(final Long requestId) {
+        this.requestId = requestId;
     }
 
     public LocalDate getDate_started() {
